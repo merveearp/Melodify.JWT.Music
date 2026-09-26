@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Melodify.DataAccessLayer\Melodify.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Melodify.DtoLayer\Melodify.DtoLayer.csproj" />
+    <ProjectReference Include="..\Melodify.EntityLayer\Melodify.EntityLayer.csproj" />
+  </ItemGroup>
+
+</Project>

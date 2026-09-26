@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="Melodify.BusinessLayer/Melodify.BusinessLayer.csproj" />
+  <Project Path="Melodify.DataAccessLayer/Melodify.DataAccessLayer.csproj" />
+  <Project Path="Melodify.DtoLayer/Melodify.DtoLayer.csproj" />
+  <Project Path="Melodify.EntityLayer/Melodify.EntityLayer.csproj" />
+  <Project Path="Melodify.WebApi/Melodify.WebApi.csproj" />
+  <Project Path="Melodify.WebUI/Melodify.WebUI.csproj" />
+</Solution>
