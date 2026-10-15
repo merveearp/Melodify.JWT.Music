@@ -1,0 +1,14 @@
+﻿using Melodify.EntityLayer.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Melodify.BusinessLayer.Abstract
+{
+    public interface IJwtService
+    {
+        Task<string> GenerateTokenAsync(AppUser appUser);
+    }
+}
