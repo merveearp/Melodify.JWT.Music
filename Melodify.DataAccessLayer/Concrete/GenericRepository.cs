@@ -11,8 +11,8 @@ namespace Melodify.DataAccessLayer.Concrete
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly MusicContext _context;
-        private readonly DbSet<T> _table;
+        protected readonly MusicContext _context;
+        protected readonly DbSet<T> _table;
 
         public GenericRepository(MusicContext context)
         {

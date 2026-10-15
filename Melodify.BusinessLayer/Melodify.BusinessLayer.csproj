@@ -12,4 +12,9 @@
     <ProjectReference Include="..\Melodify.EntityLayer\Melodify.EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="10.0.13" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.23.0" />
+  </ItemGroup>
+
 </Project>

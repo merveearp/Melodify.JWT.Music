@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Melodify.EntityLayer\Melodify.EntityLayer.csproj" />
+  </ItemGroup>
+
 </Project>
