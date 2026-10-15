@@ -12,11 +12,34 @@ namespace Melodify.BusinessLayer.Concrete
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IGenericRepository<Package> _genericRepository;
+        private readonly IJwtService _jwtService;
 
-        public AuthService(UserManager<AppUser> userManager, IGenericRepository<Package> genericRepository)
+        public AuthService(UserManager<AppUser> userManager, IGenericRepository<Package> genericRepository, IJwtService jwtService)
         {
             _userManager = userManager;
             _genericRepository = genericRepository;
+            _jwtService = jwtService;
+        }
+
+        public async Task<string> LoginAsync(LoginDto loginDto)
+        {
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            if(user is null)
+            {
+                return null;
+            }
+
+            var password = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+
+            if(!password)
+            {
+                return null;
+            }
+
+           var token =  await _jwtService.GenerateTokenAsync(user);
+           return token;
+           
+
         }
 
         public async Task<IdentityResult> RegisterAsync(RegisterDto registerDto)

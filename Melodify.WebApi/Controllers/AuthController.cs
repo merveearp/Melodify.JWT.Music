@@ -1,7 +1,10 @@
-﻿using Melodify.BusinessLayer.Abstract;
+﻿using Azure.Core;
+using Melodify.BusinessLayer.Abstract;
 using Melodify.DtoLayer.AuthDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Melodify.WebApi.Controllers
 {
@@ -30,5 +33,29 @@ namespace Melodify.WebApi.Controllers
             });
         }
 
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginDto loginDto)
+        {
+            var token = await _authService.LoginAsync(loginDto);
+
+            if(token is null)
+            {
+                return Unauthorized("E-Posta veya Şifre Hatalı!");
+            }
+
+            return Ok(new {AccessToken=token});
+
+        }
+
+        [Authorize]
+        [HttpGet("me")]
+        public IActionResult Me()
+        {
+            return Ok(new
+            {
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                UserName = User.Identity?.Name
+            });
+        }
     }
 }
