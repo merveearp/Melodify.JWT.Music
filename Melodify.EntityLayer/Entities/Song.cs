@@ -19,10 +19,7 @@
         public int GenreId { get; set; }
         public Genre Genre { get; set; } = null!;
 
-        // Şarkıyı dinlemek için gereken minimum paket
-        public int PackageId { get; set; }
-        public Package Package { get; set; } = null!;
-
+        
         public List<PlaylistSong> PlaylistSongs { get; set; } = new();
         public List<SongLike> SongLikes { get; set; } = new();
         public List<ListeningHistory> ListeningHistories { get; set; } = new();

@@ -1,9 +1,4 @@
 ﻿using Melodify.EntityLayer.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Melodify.EntityLayer.Entities
 {
@@ -18,6 +13,17 @@ namespace Melodify.EntityLayer.Entities
 
 
         public List<AppUser> Users { get; set; } 
-        public List<Song> Songs { get; set; } 
+        
+
+        public int? MonthlyListeningLimit { get; set; }
+        public int? HourlySkipLimit { get; set; }
+        public int? PlaylistLimit { get; set; }
+        public int? SongsPerPlaylistLimit { get; set; }
+        public int? HistoryVisibleDays { get; set; }
+
+        public bool HasAds { get; set; }
+        public int? AdInterval { get; set; }
+
+        public int? PreviewSecondsAfterLimit { get; set; }
     }
 }

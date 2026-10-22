@@ -18,6 +18,6 @@ namespace Melodify.DtoLayer.SongDtos
 
         public int ArtistId { get; set; }
         public int GenreId { get; set; }
-        public int PackageId { get; set; }
+    
     }
 }

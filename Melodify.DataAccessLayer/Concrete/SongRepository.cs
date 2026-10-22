@@ -21,7 +21,6 @@ namespace Melodify.DataAccessLayer.Concrete
             return await _table.AsNoTracking()
                 .Include(x => x.Artist)
                 .Include(x => x.Genre)
-                .Include(x => x.Package)
                 .ToListAsync();
         }
 
@@ -31,7 +30,6 @@ namespace Melodify.DataAccessLayer.Concrete
                 .AsNoTracking()
                 .Include(x => x.Artist)
                 .Include(x => x.Genre)
-                .Include(x => x.Package)
                 .FirstOrDefaultAsync(x => x.SongId == id);
         }
     }

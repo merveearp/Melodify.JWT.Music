@@ -2,7 +2,6 @@ using Melodify.BusinessLayer.Extensions;
 using Melodify.DataAccessLayer.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Scalar.AspNetCore;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +13,8 @@ builder.Services
     .AddControllers();
 
 
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 
 builder.Services
@@ -43,8 +43,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
-    app.MapScalarApiReference();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

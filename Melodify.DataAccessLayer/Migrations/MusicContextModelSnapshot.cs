@@ -202,8 +202,20 @@ namespace Melodify.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PackageId"));
 
+                    b.Property<int?>("AdInterval")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasAds")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("HistoryVisibleDays")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HourlySkipLimit")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -211,13 +223,25 @@ namespace Melodify.DataAccessLayer.Migrations
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MonthlyListeningLimit")
+                        .HasColumnType("int");
+
                     b.Property<string>("PackageName")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("PlaylistLimit")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PreviewSecondsAfterLimit")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("SongsPerPlaylistLimit")
+                        .HasColumnType("int");
 
                     b.HasKey("PackageId");
 
@@ -233,38 +257,60 @@ namespace Melodify.DataAccessLayer.Migrations
                         new
                         {
                             PackageId = 1,
-                            Description = "Ücretsiz başlangıç paketi",
+                            AdInterval = 5,
+                            Description = "Reklamlı ve sınırlı kullanımlı ücretsiz paket",
+                            HasAds = true,
+                            HistoryVisibleDays = 7,
+                            HourlySkipLimit = 3,
                             IsActive = true,
                             Level = 1,
+                            MonthlyListeningLimit = 100,
                             PackageName = "Free",
-                            Price = 0m
+                            PlaylistLimit = 3,
+                            Price = 0m,
+                            SongsPerPlaylistLimit = 30
                         },
                         new
                         {
                             PackageId = 2,
-                            Description = "Öğrenciler için avantajlı üyelik paketi",
+                            Description = "Öğrenci doğrulamasıyla Premium kullanım hakları",
+                            HasAds = false,
+                            HistoryVisibleDays = 90,
+                            HourlySkipLimit = 30,
                             IsActive = true,
                             Level = 2,
+                            MonthlyListeningLimit = 500,
                             PackageName = "Student",
-                            Price = 49.90m
+                            PlaylistLimit = 20,
+                            PreviewSecondsAfterLimit = 15,
+                            Price = 49.90m,
+                            SongsPerPlaylistLimit = 200
                         },
                         new
                         {
                             PackageId = 3,
-                            Description = "Premium müzik üyeliği",
+                            Description = "Reklamsız ve yüksek kullanım kotalı üyelik",
+                            HasAds = false,
+                            HistoryVisibleDays = 90,
+                            HourlySkipLimit = 30,
                             IsActive = true,
                             Level = 3,
+                            MonthlyListeningLimit = 500,
                             PackageName = "Premium",
-                            Price = 99.90m
+                            PlaylistLimit = 20,
+                            PreviewSecondsAfterLimit = 15,
+                            Price = 99.90m,
+                            SongsPerPlaylistLimit = 200
                         },
                         new
                         {
                             PackageId = 4,
-                            Description = "Tüm içeriklere erişim sağlayan üyelik paketi",
+                            Description = "Reklamsız, dinleme ve atlama kotası olmayan üyelik",
+                            HasAds = false,
                             IsActive = true,
                             Level = 4,
                             PackageName = "Gold",
-                            Price = 149.90m
+                            Price = 189.90m
                         });
                 });
 
@@ -348,9 +394,6 @@ namespace Melodify.DataAccessLayer.Migrations
                     b.Property<string>("Lyrics")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PackageId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
@@ -363,8 +406,6 @@ namespace Melodify.DataAccessLayer.Migrations
                     b.HasIndex("ArtistId");
 
                     b.HasIndex("GenreId");
-
-                    b.HasIndex("PackageId");
 
                     b.ToTable("Songs");
                 });
@@ -604,17 +645,9 @@ namespace Melodify.DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Melodify.EntityLayer.Entities.Package", "Package")
-                        .WithMany("Songs")
-                        .HasForeignKey("PackageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Artist");
 
                     b.Navigation("Genre");
-
-                    b.Navigation("Package");
                 });
 
             modelBuilder.Entity("Melodify.EntityLayer.Entities.SongLike", b =>
@@ -708,8 +741,6 @@ namespace Melodify.DataAccessLayer.Migrations
 
             modelBuilder.Entity("Melodify.EntityLayer.Entities.Package", b =>
                 {
-                    b.Navigation("Songs");
-
                     b.Navigation("Users");
                 });
 

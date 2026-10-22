@@ -14,10 +14,7 @@ namespace Melodify.BusinessLayer.Mappings
                     destination => destination.ArtistName,
                     source => source.Artist.ArtistName
                 )
-                .Map(
-                    destination => destination.PackageName,
-                    source => source.Package.PackageName
-                    )
+               
                 .Map(
                     destination => destination.GenreName,
                     source => source.Genre.GenreName);

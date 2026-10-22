@@ -25,7 +25,6 @@ namespace Melodify.DtoLayer.SongDtos
         public int GenreId { get; set; }
         public string GenreName { get; set; } = string.Empty;
 
-        public int PackageId { get; set; }
-        public string PackageName { get; set; } = string.Empty;
+      
     }
 }
